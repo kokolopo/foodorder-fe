@@ -31,7 +31,7 @@ const Home = () => {
         <TopNav />
 
         {/* Promotion Benner */}
-        <div className="flex flex-col items-center justify-center w-full bg-slate-100 rounded-2xl py-8 space-y-3">
+        <div className="flex flex-col items-center justify-center w-full bg-slate-100 rounded-2xl py-8 px-4 space-y-3">
           <div className="font-bold text-3xl text-center">
             What would you <br />
             like to order?

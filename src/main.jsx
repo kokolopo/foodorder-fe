@@ -13,6 +13,7 @@ import SignIn from "./page/SignIn";
 import SignUp from "./page/SignUp";
 import Home from "./page/Home";
 import Basket from "./page/Basket";
+import Profile from "./page/Profile";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "/basket",
     element: <Basket />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 

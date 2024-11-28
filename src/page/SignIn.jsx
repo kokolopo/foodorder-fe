@@ -73,6 +73,14 @@ const SignIn = () => {
         >
           Sign In
         </Link>
+
+        {/* Forgot password */}
+        <Link
+          to={`/`}
+          className="flex w-full justify-center text-sm text-slate-500 hover:text-blue-500"
+        >
+          Forgot Password?
+        </Link>
       </MainCanvas>
     </BaseLayout>
   );
