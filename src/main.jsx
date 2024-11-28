@@ -14,6 +14,7 @@ import SignUp from "./page/SignUp";
 import Home from "./page/Home";
 import Basket from "./page/Basket";
 import Profile from "./page/Profile";
+import History from "./page/History";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/basket",
     element: <Basket />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
   {
     path: "/profile",

@@ -36,7 +36,7 @@ const ListMenu = () => {
           </div>
           <Button
             size="icon"
-            className="rounded-full bg-yellow-300 hover:bg-slate-200 w-7 h-7"
+            className="rounded-full bg-yellow-300 hover:bg-slate-200 w-9 h-9"
           >
             <LucideListFilter color="black" />
           </Button>
