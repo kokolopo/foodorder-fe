@@ -37,7 +37,7 @@ const Home = () => {
             like to order?
           </div>
 
-          <div className="flex flex-row space-x-7 bg-white pl-4 pr-3 py-2 rounded-full items-center">
+          <div className="flex flex-row gap-2 bg-white pl-4 pr-3 py-2 rounded-full items-center">
             <SearchIcon color="gray" />
             <input
               className="outline-none"
@@ -47,7 +47,7 @@ const Home = () => {
             />
             <Button
               size="icon"
-              className="rounded-full bg-yellow-300 hover:bg-slate-200"
+              className="rounded-full bg-yellow-300 hover:bg-slate-200 w-7 h-7"
             >
               <LucideListFilter color="black" />
             </Button>

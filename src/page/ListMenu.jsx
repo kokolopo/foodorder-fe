@@ -22,8 +22,10 @@ const ListMenu = () => {
         <TopNav />
 
         {/* Searc nav */}
-        <div className="flex flex-row space-x-7 justify-between bg-slate-100 pl-4 pr-3 py-2 rounded-full items-center">
-          <SearchIcon color="gray" />
+        <div className="flex flex-row space-x-7 justify-between bg-slate-100 px-2  py-2 rounded-full items-center">
+          <div className="">
+            <SearchIcon color="gray" />
+          </div>
           <input
             className="outline-none bg-slate-100"
             type="text"
@@ -32,7 +34,7 @@ const ListMenu = () => {
           />
           <Button
             size="icon"
-            className="rounded-full bg-yellow-300 hover:bg-slate-200"
+            className="rounded-full bg-yellow-300 hover:bg-slate-200 w-7 h-7"
           >
             <LucideListFilter color="black" />
           </Button>
