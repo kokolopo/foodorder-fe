@@ -22,16 +22,18 @@ const ListMenu = () => {
         <TopNav />
 
         {/* Searc nav */}
-        <div className="flex flex-row space-x-7 justify-between bg-slate-100 px-2  py-2 rounded-full items-center">
-          <div className="">
-            <SearchIcon color="gray" />
+        <div className="flex flex-row space-x-7 justify-between bg-slate-100 px-3 py-2 rounded-full items-center">
+          <div className="flex flex-row gap-2">
+            <div className="">
+              <SearchIcon color="gray" />
+            </div>
+            <input
+              className="outline-none bg-slate-100"
+              type="text"
+              name="search"
+              placeholder="Search our products.."
+            />
           </div>
-          <input
-            className="outline-none bg-slate-100"
-            type="text"
-            name="search"
-            placeholder="Search our products.."
-          />
           <Button
             size="icon"
             className="rounded-full bg-yellow-300 hover:bg-slate-200 w-7 h-7"
