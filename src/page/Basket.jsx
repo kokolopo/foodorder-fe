@@ -119,6 +119,10 @@ const Basket = () => {
 
           {/* Detail */}
           <div className="flex flex-col">
+            <div className="flex flex-row justify-between font-semibold">
+              <div className="">Table No</div>
+              <div className="">12</div>
+            </div>
             <div className="flex flex-row justify-between">
               <div className="">Subtotal</div>
               <div className="">
