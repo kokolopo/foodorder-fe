@@ -25,7 +25,7 @@ const History = () => {
 
         <div className="flex flex-wrap items-start gap-4 overflow-auto h-[80vh]">
           {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="rounded-xl shadow-lg p-3 w-full">
+            <div key={index} className="rounded-xl border shadow-md p-3 w-full">
               <div className="flex flex-row gap-3 justify-between">
                 <div className="flex flex-col">
                   {/* detail */}
