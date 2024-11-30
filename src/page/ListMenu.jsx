@@ -19,7 +19,7 @@ const ListMenu = () => {
   return (
     <BaseLayout>
       <MainCanvas>
-        <TopNav />
+        <TopNav route={"/home"} />
 
         {/* Searc nav */}
         <div className="flex flex-row space-x-7 justify-between bg-slate-100 px-3 py-2 rounded-full items-center">

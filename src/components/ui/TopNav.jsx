@@ -3,12 +3,14 @@ import { Button } from "./button";
 import { BellIcon, ChevronLeft, ShoppingBagIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const TopNav = () => {
+const TopNav = ({ route }) => {
   return (
     <div className="flex flex-row justify-between ">
-      <Button variant="outline" size="icon">
-        <ChevronLeft />
-      </Button>
+      <Link to={`${route}`}>
+        <Button variant="outline" size="icon">
+          <ChevronLeft />
+        </Button>
+      </Link>
 
       <div className="flex flex-row space-x-12">
         <Button variant="outline" size="icon">

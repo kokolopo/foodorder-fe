@@ -1,3 +1,4 @@
+import BottomNav from "@/components/ui/BottomNav";
 import TopNav from "@/components/ui/TopNav";
 import BaseLayout from "@/layout/BaseLayout";
 import MainCanvas from "@/layout/MainCanvas";
@@ -8,7 +9,7 @@ const Profile = () => {
   return (
     <BaseLayout>
       <MainCanvas>
-        <TopNav />
+        <TopNav route={"/home"} />
 
         <div className="flex flex-col border-b-2 py-3 gap-4">
           <div className="font-semibold text-xl ">Username</div>
@@ -44,6 +45,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
+        <BottomNav />
       </MainCanvas>
     </BaseLayout>
   );

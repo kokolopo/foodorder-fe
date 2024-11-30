@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import BottomNav from "@/components/ui/BottomNav";
 import { Textarea } from "@/components/ui/textarea";
 import TopNav from "@/components/ui/TopNav";
 import BaseLayout from "@/layout/BaseLayout";
@@ -19,7 +20,7 @@ const History = () => {
   return (
     <BaseLayout>
       <MainCanvas>
-        <TopNav />
+        <TopNav route={"/home"} />
 
         <div className="text-2xl font-semibold">My Orders</div>
 
@@ -59,8 +60,10 @@ const History = () => {
               </Accordion>
             </div>
           ))}
+          <div className="h-20"></div>
         </div>
-        {/* Card Order */}
+
+        <BottomNav />
       </MainCanvas>
     </BaseLayout>
   );

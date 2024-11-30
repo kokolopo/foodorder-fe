@@ -48,7 +48,7 @@ const BottomNav = () => {
             : "text-gray-400"
         }`}
       >
-        <User className="w-8 h-8" color="gray" />
+        <User className="w-8 h-8" />
       </Link>
     </div>
   );
