@@ -36,7 +36,7 @@ const TopNav = ({ route = "/home" }) => {
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+          <div className="absolute left-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
             <div className="p-2 overflow-auto h-[10vh]">
               {Array.from({ length: 9 }).map((_, index) => (
                 <div
