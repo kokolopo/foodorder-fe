@@ -15,6 +15,9 @@ import Home from "./page/Home";
 import Basket from "./page/Basket";
 import Profile from "./page/Profile";
 import History from "./page/History";
+import TableSchemaExport from "./page/Data";
+import Exaxmple from "./page/sijitu/Example";
+import Nasabah from "./page/sijitu/Nasabah";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +56,18 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+  {
+    path: "/data",
+    element: <TableSchemaExport />,
+  },
+  {
+    path: "/sijitu",
+    element: <Exaxmple/>
+  },
+  {
+    path: "/nasabah",
+    element: <Nasabah/>
+  }
 ]);
 
 function RequireAuth({ children }) {

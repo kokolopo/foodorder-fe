@@ -55,16 +55,16 @@ const App = () => {
         </div>
 
         {/* Button */}
-        <div className="flex flex-row justify-between px-3 pt-8">
+        <div className="flex flex-col justify-between px-3 gap-2">
           <Link
             to={`/sign-in`}
-            className="bg-teal-500 text-white px-11 py-3 text-xl font-semibold rounded-full shadow-lg"
+            className="bg-teal-500 text-white px-11 py-2 text-xl font-semibold rounded-full shadow-lg text-center"
           >
             Sign In
           </Link>
           <Link
             to={`/sign-up`}
-            className="bg-amber-500 text-white px-11 py-3 text-xl font-semibold rounded-full shadow-lg"
+            className="bg-amber-500 text-white px-11 py-2 text-xl font-semibold rounded-full shadow-lg text-center"
           >
             Sign Up
           </Link>
