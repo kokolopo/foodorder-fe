@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import TopNav from "@/components/ui/TopNav";
 import BaseLayout from "@/layout/BaseLayout";
 import MainCanvas from "@/layout/MainCanvas";
+import useMenu from "@/state/useMenu";
 import { FormatRupiah } from "@arismun/format-rupiah";
 import {
   LucideListFilter,
@@ -12,10 +13,70 @@ import {
   BellIcon,
   ShoppingBagIcon,
 } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ListMenu = () => {
+  const { data, loading, error, fetchMenu, setData } = useMenu();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    fetchMenu();
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredData(data);
+    }
+  }, [data]);
+
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = data.filter(
+      (product) =>
+        product.Name.toLowerCase().includes(term) ||
+        product.Category.Name.toLowerCase().includes(term)
+    );
+    setFilteredData(filtered);
+  };
+
+  const listProduct =
+    data &&
+    filteredData.map((product, index) => (
+      <Link
+        to={`/detail-product/${product.ID}`}
+        key={index}
+        className="w-[47%] p-2 shadow-lg h-fit rounded-xl space-y-2"
+      >
+        <div
+          className="w-full h-40 bg-cover bg-center relative rounded-2xl overflow-hidden p-3"
+          style={{
+            backgroundImage: `url(${product.Image})`,
+          }}
+        ></div>
+        <div className="">
+          <div className="text-sm text-slate-400">{product.Category.Name}</div>
+          <div className="font-semibold">{product.Name}</div>
+        </div>
+
+        <div className="flex flex-row items-center justify-between px-2 py-1 rounded-full shadow">
+          <div className="">
+            <FormatRupiah value={product.Price} />
+          </div>
+          <div className="bg-yellow-400 p-1 rounded-full">
+            <Plus color="white" />
+          </div>
+        </div>
+      </Link>
+    ));
+
+  if (loading) {
+    return <div className="flex items-center justify-center">Loading...</div>;
+  }
+
   return (
     <BaseLayout>
       <MainCanvas>
@@ -28,10 +89,12 @@ const ListMenu = () => {
               <SearchIcon color="gray" />
             </div>
             <input
-              className="outline-none bg-slate-100"
+              className="outline-none bg-slate-100 w-full"
               type="text"
               name="search"
-              placeholder="Search our products.."
+              placeholder="Search by name or category..."
+              value={searchTerm}
+              onChange={handleSearch}
             />
           </div>
           <Button
@@ -43,34 +106,8 @@ const ListMenu = () => {
         </div>
 
         {/* List Menu */}
-        <div className="flex flex-wrap items-start gap-4 overflow-auto h-[90vh]">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <Link
-              to={`/detail-product`}
-              key={index}
-              className="w-[47%] p-2 shadow-lg h-fit rounded-xl space-y-2"
-            >
-              <div
-                className="w-full h-40 bg-cover bg-center relative rounded-2xl overflow-hidden p-3"
-                style={{
-                  backgroundImage: `url(https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg)`,
-                }}
-              ></div>
-              <div className="">
-                <div className="text-sm text-slate-400">Category</div>
-                <div className="font-semibold">Food Name</div>
-              </div>
-
-              <div className="flex flex-row items-center justify-between px-2 py-1 rounded-full shadow">
-                <div className="">
-                  <FormatRupiah value={12000} />
-                </div>
-                <div className="bg-yellow-400 p-1 rounded-full">
-                  <Plus color="white" />
-                </div>
-              </div>
-            </Link>
-          ))}
+        <div className="flex flex-wrap items-start gap-4 overflow-auto h-[67vh]">
+          {data && listProduct}
 
           <div className="h-20"></div>
         </div>

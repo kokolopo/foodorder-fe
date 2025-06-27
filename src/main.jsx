@@ -18,6 +18,7 @@ import History from "./page/History";
 import TableSchemaExport from "./page/Data";
 import Exaxmple from "./page/sijitu/Example";
 import Nasabah from "./page/sijitu/Nasabah";
+import Cookies from "js-cookie";
 
 const router = createBrowserRouter([
   {
@@ -41,20 +42,32 @@ const router = createBrowserRouter([
     element: <ListMenu />,
   },
   {
-    path: "/detail-product",
+    path: "/detail-product/:productId",
     element: <DetailProduct />,
   },
   {
     path: "/basket",
-    element: <Basket />,
+    element: (
+      <RequireAuth>
+        <Basket />
+      </RequireAuth>
+    ),
   },
   {
     path: "/history",
-    element: <History />,
+    element: (
+      <RequireAuth>
+        <History />
+      </RequireAuth>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+      <RequireAuth>
+        <Profile />
+      </RequireAuth>
+    ),
   },
   {
     path: "/data",
@@ -62,17 +75,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/sijitu",
-    element: <Exaxmple/>
+    element: <Exaxmple />,
   },
   {
     path: "/nasabah",
-    element: <Nasabah/>
-  }
+    element: <Nasabah />,
+  },
 ]);
 
 function RequireAuth({ children }) {
   const isAuthenticated = Cookies.get("token");
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  return isAuthenticated ? children : <Navigate to="/sign-in" replace />;
 }
 
 createRoot(document.getElementById("root")).render(

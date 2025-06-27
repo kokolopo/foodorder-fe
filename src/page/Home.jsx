@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ChevronLeft,
   BellIcon,
@@ -22,8 +22,17 @@ import MainCanvas from "../layout/MainCanvas";
 import BottomNav from "@/components/ui/BottomNav";
 import { Link } from "react-router-dom";
 import TopNav from "@/components/ui/TopNav";
+import useMenu from "@/state/useMenu";
 
 const Home = () => {
+  const { data, fetchMenu, fetchCategories, categories } = useMenu();
+
+  useEffect(() => {
+    fetchMenu();
+    fetchCategories();
+  }, [fetchMenu, fetchCategories]);
+  // console.log({ categories });
+
   return (
     <BaseLayout>
       <MainCanvas>
@@ -59,7 +68,9 @@ const Home = () => {
           <div className="space-y-3">
             <div className="flex flex-row justify-between items-center">
               <div className="text-lg font-semibold">Our Menu</div>
-              <div className="text-sm">Show All</div>
+              <Link to={"/products"} className="text-sm">
+                Show All
+              </Link>
             </div>
 
             <div className="">
@@ -69,20 +80,20 @@ const Home = () => {
                 }}
               >
                 <CarouselContent>
-                  {Array.from({ length: 7 }).map((_, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="basis-[24%] flex flex-col items-center mr-6"
-                      // className="max-w-fit flex flex-col items-center space-y-1"
-                    >
-                      <img
-                        src="https://www.themealdb.com/images/media/meals/uuxwvq1483907861.jpg"
-                        alt="gambar"
-                        className="rounded-full"
-                      />
-                      <div className="font-semibold">Japanese</div>
-                    </CarouselItem>
-                  ))}
+                  {categories &&
+                    categories.map((category, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="basis-[24%] flex flex-col items-center mr-6"
+                      >
+                        <img
+                          src="https://www.themealdb.com/images/media/meals/uuxwvq1483907861.jpg"
+                          alt="gambar"
+                          className="rounded-full"
+                        />
+                        <div className="font-semibold">{category?.Name}</div>
+                      </CarouselItem>
+                    ))}
                 </CarouselContent>
               </Carousel>
             </div>
@@ -92,7 +103,9 @@ const Home = () => {
           <div className="space-y-3">
             <div className="flex flex-row justify-between items-center">
               <div className="text-lg font-semibold">Promo</div>
-              <div className="text-sm">Show All</div>
+              <Link to={"/products"} className="text-sm">
+                Show All
+              </Link>
             </div>
 
             <div className="">
@@ -102,38 +115,39 @@ const Home = () => {
                 }}
               >
                 <CarouselContent>
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="basis-[66%] flex flex-col mr-4 space-y-1"
-                    >
-                      <Link
-                        to={`/detail-product`}
-                        className="w-56 h-36 bg-cover bg-center relative rounded-lg overflow-hidden p-3"
-                        style={{
-                          backgroundImage: `url(https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg)`,
-                        }}
+                  {data &&
+                    data.slice(0, 3).map((val, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="basis-[66%] flex flex-col mr-4 space-y-1"
                       >
-                        <div className="flex flex-col justify-between h-full">
-                          <div className="bg-white w-fit px-2 py-1 rounded-full text-xs font-semibold">
-                            Japanese
-                          </div>
-                          <div className="text-xl items-center flex justify-center">
-                            <div className="bg-white bg-opacity-45 rounded-xl p-2 font-bold text-red-400">
-                              %20
+                        <Link
+                          to={`/detail-product`}
+                          className="w-56 h-36 bg-cover bg-center relative rounded-lg overflow-hidden p-3"
+                          style={{
+                            backgroundImage: `url(${val.Image})`,
+                          }}
+                        >
+                          <div className="flex flex-col justify-between h-full">
+                            <div className="bg-white w-fit px-2 py-1 rounded-full text-xs font-semibold">
+                              {val.Category.Name}
                             </div>
-                          </div>
+                            <div className="text-xl items-center flex justify-center">
+                              <div className="bg-white bg-opacity-45 rounded-xl p-2 font-bold text-red-400">
+                                %20
+                              </div>
+                            </div>
 
-                          <div className="flex flow-row justify-between font-semibold text-white">
-                            <div className="">Food Name</div>
-                            <div className="">
-                              <FormatRupiah value={23000} />
+                            <div className="flex flow-row justify-between font-semibold text-white">
+                              <div className="">{val.Name}</div>
+                              <div className="">
+                                <FormatRupiah value={val.Price} />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </CarouselItem>
-                  ))}
+                        </Link>
+                      </CarouselItem>
+                    ))}
                 </CarouselContent>
               </Carousel>
             </div>
@@ -143,7 +157,9 @@ const Home = () => {
           <div className="space-y-3">
             <div className="flex flex-row justify-between items-center">
               <div className="text-lg font-semibold">Popular</div>
-              <div className="text-sm">Show All</div>
+              <Link to={"/products"} className="text-sm">
+                Show All
+              </Link>
             </div>
 
             <div className="">
@@ -153,33 +169,39 @@ const Home = () => {
                 }}
               >
                 <CarouselContent>
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="basis-[66%] flex flex-col mr-4 space-y-1"
-                    >
-                      <Link
-                        to={`/detail-product`}
-                        className="w-56 h-36 bg-cover bg-center relative rounded-lg overflow-hidden p-3"
-                        style={{
-                          backgroundImage: `url(https://www.themealdb.com/images/media/meals/xrptpq1483909204.jpg)`,
-                        }}
+                  {data &&
+                    data.slice(2, 5).map((val, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="basis-[66%] flex flex-col mr-4 space-y-1"
                       >
-                        <div className="flex flex-col justify-between h-full">
-                          <div className="bg-white w-fit px-2 py-1 rounded-full text-xs font-semibold">
-                            Japanese
-                          </div>
+                        <Link
+                          to={`/detail-product`}
+                          className="w-56 h-36 bg-cover bg-center relative rounded-lg overflow-hidden p-3"
+                          style={{
+                            backgroundImage: `url(${val.Image})`,
+                          }}
+                        >
+                          <div className="flex flex-col justify-between h-full">
+                            <div className="bg-white w-fit px-2 py-1 rounded-full text-xs font-semibold">
+                              {val.Category.Name}
+                            </div>
+                            <div className="text-xl items-center flex justify-center">
+                              <div className="bg-white bg-opacity-45 rounded-xl p-2 font-bold text-red-400">
+                                %20
+                              </div>
+                            </div>
 
-                          <div className="flex flow-row justify-between font-semibold text-white">
-                            <div className="">Food Name</div>
-                            <div className="">
-                              <FormatRupiah value={23000} />
+                            <div className="flex flow-row justify-between font-semibold text-white">
+                              <div className="">{val.Name}</div>
+                              <div className="">
+                                <FormatRupiah value={val.Price} />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </CarouselItem>
-                  ))}
+                        </Link>
+                      </CarouselItem>
+                    ))}
                 </CarouselContent>
               </Carousel>
             </div>

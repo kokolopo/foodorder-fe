@@ -2,14 +2,41 @@ import BaseLayout from "@/layout/BaseLayout";
 import MainCanvas from "@/layout/MainCanvas";
 import Image from "../image/login-image.png";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/PasswordInput";
 import { ArrowLeft } from "lucide-react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/login`,
+        {
+          email,
+          password,
+        }
+      );
+      Cookies.set("token", response.data.result.token);
+      Cookies.set("username", response.data.result.fullname);
+      Cookies.set("email", response.data.result.email);
+      console.log(response.data);
+
+      navigate("/home");
+    } catch (error) {
+      console.error(error.response);
+      alert("email/password is wrong!");
+    }
+  };
 
   return (
     <BaseLayout>
@@ -49,30 +76,37 @@ const SignIn = () => {
         </div>
 
         {/* Form */}
-        <div className="flex flex-col gap-4">
-          <div className="grid min-w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" placeholder="Email" />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
+            <div className="grid min-w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <PasswordInput
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+              />
+            </div>
           </div>
 
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <PasswordInput
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-            />
-          </div>
-        </div>
-
-        {/* Button */}
-        <Link
-          to={"/home"}
-          className="bg-amber-500 text-white w-full flex items-center justify-center py-3 rounded-full text-xl font-semibold"
-        >
-          Sign In
-        </Link>
+          {/* Button */}
+          <button
+            type="submit"
+            className="bg-amber-500 text-white w-full flex items-center justify-center py-3 rounded-full text-xl font-semibold"
+          >
+            Sign In
+          </button>
+        </form>
 
         {/* Forgot password */}
         <Link

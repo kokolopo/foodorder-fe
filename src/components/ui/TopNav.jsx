@@ -10,10 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Cookies from "js-cookie";
 
 const TopNav = ({ route = "/home" }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [table, setTable] = useState(0);
+  const [table, setTable] = useState(Cookies.get("table") || 0);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -38,11 +39,12 @@ const TopNav = ({ route = "/home" }) => {
         {isOpen && (
           <div className="absolute left-0 mt-2 w-56 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
             <div className="p-2 overflow-auto h-[10vh]">
-              {Array.from({ length: 9 }).map((_, index) => (
+              {Array.from({ length: 9 }).map((v, index) => (
                 <div
                   className="hover:bg-amber-500"
                   onClick={() => {
                     setTable(index);
+                    Cookies.set("table", index);
                     toggleDropdown();
                   }}
                 >
